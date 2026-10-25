@@ -1,6 +1,4 @@
-/* ============================================================================
-   6 · MENU BAR
-   ========================================================================== */
+
 function battSVG(pct, charging) {
   const w = clamp(pct, 0, 100) / 100 * 18.4;
   const col = charging ? '#34c759' : pct <= 10 ? '#ff453a' : pct <= 20 ? '#ff9f0a' : 'currentColor';
@@ -47,11 +45,11 @@ const MenuBar = {
         `${DAYS3[d.getDay()]}${NBSP}${MONS3[d.getMonth()]}${NBSP}${d.getDate()}${NBSP}${NBSP}${time12(d)}`;
     });
 
-    /* titles: click opens, hover switches while a menu is open */
+
     on(bar, 'mousedown', '.mb-item', (e, t) => { e.preventDefault(); this.toggle(t); });
     on(bar, 'mouseenter', '.mb-item', (e, t) => { if (this.openIdx >= 0 && !t.classList.contains('open')) this.toggle(t); }, true);
     on(bar, 'mousedown', '.mb-st', (e, t) => { e.preventDefault(); this.status(t); });
-    /* The shield no longer covers the bar, so dead space has to dismiss itself. */
+
     bar.addEventListener('mousedown', e => { if (!e.target.closest('.mb-item,.mb-st')) Pop.close(); });
 
     Bus.on('theme', () => this.paintStatus());
@@ -99,8 +97,7 @@ const MenuBar = {
 
   status(t) {
     const k = t.dataset.st, r = t.getBoundingClientRect();
-    /* Clock first: it wears .open while Notification Centre is up, so the generic
-       "already open → dismiss the popover" branch would swallow the toggle. */
+
     if (k === 'clock') { NotifCenter.toggle(); return; }
     if (t.classList.contains('open')) { Pop.close(); return; }
     if (k === 'spot') { Spotlight.open(); return; }
@@ -114,7 +111,7 @@ const MenuBar = {
   }
 };
 
-/* ---- Apple menu ---------------------------------------------------------- */
+
 const APPLE_MENU = () => [
   { id: 'about', label: 'About This Mac', run: () => WM.open('about') },
   '-',
@@ -144,7 +141,7 @@ const APP_ABOUT = {
   ]
 };
 
-/* ---- Per-app menu bars --------------------------------------------------- */
+
 const M = (label, items) => ({ label, items });
 const APP_MENUS = {
   finder: [
@@ -198,10 +195,7 @@ function WINDOW_MENU_LAZY() {
     { id: 'brf', label: 'Bring All to Front', run: () => WM.showAll() },
   ];
 }
-/* Every app gets File/Edit/View/Window/Help; apps override the interesting bits. */
-/* `order` lets an app place its own menus where AppKit puts them — Terminal has a
-   Shell menu instead of File, Music slots Controls between View and Window. Without
-   it, merged-in keys land after Help, which no Mac app does. */
+
 function stdMenus(appId, over = {}, order = null) {
   const base = {
     File: [
@@ -231,7 +225,7 @@ function stdMenus(appId, over = {}, order = null) {
   return (order || Object.keys(base)).filter(k => base[k]).map(k => M(k, base[k]));
 }
 
-/* ---- Status panels ------------------------------------------------------- */
+
 const NETWORKS = [
   { n: 'Ashhh 5G', s: 3, lock: true }, { n: 'Ashhh 2.4G', s: 3, lock: true },
   { n: 'JioFiber-4821', s: 2, lock: true }, { n: 'Airtel_Xstream', s: 2, lock: true },
