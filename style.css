@@ -1,25 +1,22 @@
-/* ==========================================================================
-   0. TOKENS
-   ========================================================================== */
+
 :root{
   color-scheme: light;
 
   --font-ui:'SF Pro Text','SF Pro Display',-apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
   --font-mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Monaco,Consolas,monospace;
 
-  --mb-h:25px;                 /* menu bar height */
-  --dock-size:54px;            /* dock icon base size (live-tunable) */
-  --dock-mag:1.42;             /* dock magnification factor */
+  --mb-h:25px;     
+  --dock-size:54px; 
+  --dock-mag:1.42;             
   --dock-bottom:6px;
 
-  /* System colours */
+
   --blue:#0a7cff;
   --blue-press:#0064d8;
   --red:#ff453a;
   --green:#30d158;
   --orange:#ff9f0a;
 
-  /* Surfaces — light appearance */
   --win:#ffffff;
   --win-2:#f7f7f7;
   --win-3:#efeff1;
@@ -32,13 +29,12 @@
   --field:rgba(255,255,255,.85);
   --field-border:rgba(0,0,0,.12);
 
-  /* Ink */
   --txt:#1d1d1f;
   --txt-2:rgba(60,60,67,.62);
   --txt-3:rgba(60,60,67,.34);
   --on-accent:#fff;
 
-  /* Lines & fills */
+
   --line:rgba(0,0,0,.085);
   --line-2:rgba(0,0,0,.14);
   --fill:rgba(120,120,128,.12);
@@ -46,29 +42,25 @@
   --hover:rgba(0,0,0,.045);
   --sel-soft:rgba(120,120,128,.18);
 
-  /* Menu-bar ink: rides on wallpaper, so it gets its own channel. Wall.set()
-     samples the top strip of the picture and flips this pair to dark over a
-     bright sky, which is what AppKit does — white-on-white is a dead giveaway. */
   --mb-ink:#fff;
   --mb-shadow:0 0 3px rgba(0,0,0,.35);
   --mb-glyph-shadow:0 0 2px rgba(0,0,0,.28);
   --mb-hover:rgba(255,255,255,.20);
   --mb-hover-2:rgba(255,255,255,.28);
 
-  /* Glass. The brightness lift is what keeps light-mode vibrancy reading as
-     *light* over a dark wallpaper, the way AppKit's materials do. */
+
   --glass-dock:rgba(255,255,255,.40);
   --glass-dock-edge:rgba(255,255,255,.5);
   --glass-blur:30px;
   --vib:saturate(180%) brightness(1.28);
 
-  /* Motion */
+
   --e-out:cubic-bezier(.23,1,.32,1);
   --e-io:cubic-bezier(.65,0,.35,1);
   --e-spring:cubic-bezier(.34,1.42,.64,1);
   --e-drawer:cubic-bezier(.32,.72,0,1);
 
-  /* Window shadow — layered like the real compositor */
+
   --shadow-win:
     0 0 0 .5px rgba(0,0,0,.14),
     0 3px 8px rgba(0,0,0,.07),
@@ -84,8 +76,7 @@
     0 20px 44px -12px rgba(0,0,0,.26);
 }
 
-/* Bright wallpaper + Light appearance: ink goes dark, halo goes light. Dark
-   appearance always keeps white ink, so this is deliberately not in [data-theme]. */
+
 [data-theme="light"][data-mb-ink="dark"]{
   --mb-ink:rgba(0,0,0,.88);
   --mb-shadow:0 0 3px rgba(255,255,255,.45);
@@ -162,22 +153,12 @@ body{
 }
 #stage{position:fixed;inset:0;overflow:hidden;isolation:isolate}
 
-/* ==========================================================================
-   2b. POINTERS
-   Every cursor here is drawn rather than borrowed, because the host OS arrow is
-   the single fastest way to break the illusion — a Windows arrow over a Mac dock
-   reads as "web page" instantly. Each one is a two-pass shape: a fattened black
-   pass for the outline, then the fill on top, which is exactly how Apple's own
-   cursor assets are built. Hotspots are the second/third url() numbers.
-   ========================================================================== */
 :root{
   --cur-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='28' viewBox='0 0 20 28'%3E%3Cpath d='M3 2.2 3 22.4 8.6 17 12 24.8 15.2 23.4 11.8 15.6 18.6 15.6Z' fill='%23000' stroke='%23fff' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E") 3 2,default;
   --cur-hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='30' viewBox='0 0 26 30'%3E%3Cdefs%3E%3Cg id='h'%3E%3Crect x='8.1' y='2.6' width='4.6' height='13.4' rx='2.3'/%3E%3Crect x='12.2' y='9' width='4.2' height='8' rx='2.1'/%3E%3Crect x='15.8' y='10.2' width='4' height='7' rx='2'/%3E%3Crect x='19.1' y='11.6' width='3.8' height='6' rx='1.9'/%3E%3Crect x='7' y='13.2' width='15.9' height='11.4' rx='4.4'/%3E%3Crect x='3.9' y='14.6' width='6' height='4.2' rx='2.1' transform='rotate(34 6.9 16.7)'/%3E%3C/g%3E%3C/defs%3E%3Cg fill='%23000' stroke='%23000' stroke-width='3' stroke-linejoin='round'%3E%3Cuse href='%23h'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Cuse href='%23h'/%3E%3C/g%3E%3C/svg%3E") 10 3,pointer;
   --cur-fist:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cdefs%3E%3Cg id='f'%3E%3Crect x='8.4' y='6.4' width='4.4' height='6.4' rx='2.2'/%3E%3Crect x='12.3' y='6' width='4.2' height='6.6' rx='2.1'/%3E%3Crect x='15.9' y='6.8' width='4' height='6' rx='2'/%3E%3Crect x='19.1' y='8' width='3.8' height='5.4' rx='1.9'/%3E%3Crect x='7' y='9.4' width='15.9' height='11.4' rx='4.4'/%3E%3Crect x='3.9' y='10.4' width='6' height='4.2' rx='2.1' transform='rotate(34 6.9 12.5)'/%3E%3C/g%3E%3C/defs%3E%3Cg fill='%23000' stroke='%23000' stroke-width='3' stroke-linejoin='round'%3E%3Cuse href='%23f'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Cuse href='%23f'/%3E%3C/g%3E%3C/svg%3E") 12 10,grabbing;
   --cur-text:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='24' viewBox='0 0 12 24'%3E%3Cg stroke='%23fff' stroke-width='2.6' stroke-linecap='round' fill='none'%3E%3Cpath d='M6 4.6V19.4M3.4 4.6h5.2M3.4 19.4h5.2'/%3E%3C/g%3E%3Cg stroke='%23000' stroke-width='1.3' stroke-linecap='round' fill='none'%3E%3Cpath d='M6 4.6V19.4M3.6 4.6h4.8M3.6 19.4h4.8'/%3E%3C/g%3E%3C/svg%3E") 6 12,text;
-  /* Resize cursors: Apple's are a black double arrow with a centre bar and a white
-     halo — the inverse of the hand, so the two passes swap colours. Overlapping
-     sub-shapes are safe this way; a single stroked path would draw seams. */
+
   --cur-ew:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='18' viewBox='0 0 26 18'%3E%3Cdefs%3E%3Cg id='r'%3E%3Cpath d='M1.6 9 7.6 4V14Z'/%3E%3Cpath d='M24.4 9 18.4 4V14Z'/%3E%3Crect x='7' y='7.7' width='12' height='2.6' rx='.7'/%3E%3Crect x='12.05' y='3.8' width='1.9' height='10.4' rx='.8'/%3E%3C/g%3E%3C/defs%3E%3Cg fill='%23fff' stroke='%23fff' stroke-width='3' stroke-linejoin='round'%3E%3Cuse href='%23r'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cuse href='%23r'/%3E%3C/g%3E%3C/svg%3E") 13 9,ew-resize;
   --cur-ns:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='26' viewBox='0 0 18 26'%3E%3Cdefs%3E%3Cg id='r'%3E%3Cpath d='M9 1.6 4 7.6H14Z'/%3E%3Cpath d='M9 24.4 4 18.4H14Z'/%3E%3Crect x='7.7' y='7' width='2.6' height='12' rx='.7'/%3E%3Crect x='3.8' y='12.05' width='10.4' height='1.9' rx='.8'/%3E%3C/g%3E%3C/defs%3E%3Cg fill='%23fff' stroke='%23fff' stroke-width='3' stroke-linejoin='round'%3E%3Cuse href='%23r'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cuse href='%23r'/%3E%3C/g%3E%3C/svg%3E") 9 13,ns-resize;
   --cur-nwse:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cdefs%3E%3Cg id='r'%3E%3Cpath d='M1.8 13 7.8 8V18Z'/%3E%3Cpath d='M24.2 13 18.2 8V18Z'/%3E%3Crect x='7.2' y='11.7' width='11.6' height='2.6' rx='.7'/%3E%3Crect x='12.05' y='7.8' width='1.9' height='10.4' rx='.8'/%3E%3C/g%3E%3C/defs%3E%3Cg transform='rotate(45 13 13)'%3E%3Cg fill='%23fff' stroke='%23fff' stroke-width='3' stroke-linejoin='round'%3E%3Cuse href='%23r'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cuse href='%23r'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") 13 13,nwse-resize;
@@ -185,27 +166,27 @@ body{
   --cur-cross:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg stroke='%23fff' stroke-width='3'%3E%3Cpath d='M12 1v22M1 12h22'/%3E%3C/g%3E%3Cg stroke='%23000' stroke-width='1.4'%3E%3Cpath d='M12 1.6v20.8M1.6 12h20.8'/%3E%3C/g%3E%3C/svg%3E") 12 12,crosshair;
 }
 html,body{cursor:var(--cur-arrow)}
-/* The hand marks anything that responds to a click. */
+
 button,a,.di,.mb-item,.mi,.dicon,.tl b,.sb-i,.tbtn,.btn,.seg span,.sw,.ck,.fv-icon .fi,.fv-list .row,
 .fv-col .ci,.nt-i,.msg-c,.alb,.ph-cell,.sf-tab,.sf-fav a,.lp .app,#lpad .app,.r,.st,.pop .mi,
 .set-i,.cal-nav,.di .art,.note,.wg,[data-goto],[role="button"],.chip,.tab,.mu-song,.ct-i,.bk,.tv-c,.as-c{cursor:var(--cur-hand)}
 input,textarea,[contenteditable="true"],.selectable,.tm-body{cursor:var(--cur-text)}
-/* Disabled controls fall back to the plain arrow, like AppKit. */
+
 .dis,[disabled],.mi.dis,button:disabled{cursor:var(--cur-arrow)}
 
 button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;-webkit-appearance:none;appearance:none}
 input,textarea{font:inherit;color:inherit}
 input:focus,textarea:focus,[contenteditable]:focus{outline:none}
-/* --sel defaults to the accent; Appearance can pin it to its own colour. */
+
 ::selection{background:color-mix(in srgb,var(--sel,var(--blue)) 32%,transparent)}
 .nosel{-webkit-user-select:none;user-select:none}
 body{-webkit-user-select:none;user-select:none}
 input,textarea,[contenteditable="true"],.selectable{-webkit-user-select:text;user-select:text}
-/* Sensible default so a sprite reference can never render at a wild size */
+
 svg{display:block;flex:none;width:16px;height:16px}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* macOS scrollbars — overlay style, appear on hover */
+
 .scroll{overflow:auto;scrollbar-width:thin;scrollbar-color:transparent transparent}
 .scroll:hover{scrollbar-color:var(--fill-2) transparent}
 .scroll::-webkit-scrollbar{width:14px;height:14px}
