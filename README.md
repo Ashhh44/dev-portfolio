@@ -39,4 +39,4 @@ To run it through a local server
 **M.Ashraf Rehman**
  
 - GitHub: [@ashrafff4](https://github.com/ashrafff4)
-- LinkedIn: [mohammad-ashraf-rehman](https://www.linkedin.com/in/mohammad-ashraf-rehman/)
+- LinkedIn: [mohammad-ashraf-rehman]([https://www.linkedin.com/in/mohammad-ashraf-rehman/](https://www.linkedin.com/in/mohammad-ashraf-rehman-4333bb379/))
