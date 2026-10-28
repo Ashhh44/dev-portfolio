@@ -1,5 +1,3 @@
-/* Apple-style continuous-corner squircle, built before first paint so icons
-   never flash with the wrong silhouette. |x|^n + |y|^n = 1, n = 5. */
 (function(){
   function path(S, prec){
     var pts=[], steps=64, i, t, c, s, x, y;
