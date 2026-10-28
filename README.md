@@ -2,7 +2,7 @@
  
 A personal portfolio designed as a macOS desktop that runs in the browser. Visitors can open windows, browse files, read my resume and get in touch, all inside a familiar desktop interface.
  
-**Live demo:** [ashrafff4.github.io/dev-portfolio](https://ashrafff4.github.io/dev-portfolio/)
+**Live demo:** [ashrafff4.github.io/dev-portfolio](https://ashhh-portfolio.vercel.app/)
  
 
 ## Features
